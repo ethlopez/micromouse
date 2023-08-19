@@ -122,7 +122,7 @@ class Mouse:
         """
         This subroutine finds an optimised route through the maze.
 
-        TODO: Describe the solve algorithm.
+        TODO: Document the solve algorithm.
         """
 
         # TODO: Implement a solve algorithm.
