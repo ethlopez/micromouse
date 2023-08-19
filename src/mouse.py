@@ -15,7 +15,7 @@ class Mouse:
         """
         Constructor for the Mouse class.
 
-        The list self.route contains lists of commands.
+        The list self.route contains commands.
         Each command is a list of length 2:
             command[0] is the steps argument for move()
             command[1] is the angle argument for turn()
