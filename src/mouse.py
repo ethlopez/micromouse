@@ -98,7 +98,7 @@ class Mouse:
         for i in range(4):
             is_clear: bool = self.check()
             surroundings.append(is_clear)
-            self.turn(90)
+            self.turn(90, True)
         
         return tuple(surroundings)
     

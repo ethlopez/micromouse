@@ -35,3 +35,4 @@ def display_maze(maze: list[int]) -> None:
 
     # TODO: Implement subroutine.
     print(maze)
+
