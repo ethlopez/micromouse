@@ -149,4 +149,3 @@ class Mouse:
 
         # TODO: Implement a solve algorithm.
         pass
-
