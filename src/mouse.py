@@ -2,6 +2,18 @@ class Mouse:
     """
     Main class for micromouse.
 
+    The mouse has 2 modes, virtual mode and actual mode.
+    In virtual mode, it explores a virtual maze.
+    In actual mode, it works with actual environment using hardware.
+    Mode is stored in the boolean is_virtual:
+    - True means virtual mode.
+    - False means actual mode.
+    By design, only certain subroutines should depend on mode:
+    - _info()
+    - move()
+    - turn()
+    - check()
+
     TODO: Implement coordinate and direction system (likely vectors).
     TODO: Implement physics system (ties well with vectors).
     TODO: Complete documentation for each subroutine.
@@ -11,19 +23,28 @@ class Mouse:
     map: list[int] = []
 
 
-    def __init__(self) -> None:
+    def __init__(self, maze: list[int] | None = None) -> None:
         """
         Constructor for the Mouse class.
 
         The list self.route contains commands.
         Each command is a list of length 2:
-            command[0] is the steps argument for move()
-            command[1] is the angle argument for turn()
+        - command[0] is the steps argument for move()
+        - command[1] is the angle argument for turn()
+        
+        The maze parameter is optional.
+        - If provided, the mouse runs in virtual mode.
+        - Otherwise, it runs in actual mode.
 
         TODO: Complete any other setup.
         """
         
         self.route: list[list[int, float]] = []
+        self.is_virtual: bool = False
+
+        if maze is not None:
+            self.maze: list[int] = maze
+            self.is_virtual = True
 
 
     def _info(self):
@@ -35,6 +56,7 @@ class Mouse:
 
         # TODO: Implement debugging subroutine.
         pass
+
 
     def move(self, steps: int) -> bool:
         """
@@ -101,8 +123,8 @@ class Mouse:
             self.turn(90, True)
         
         return tuple(surroundings)
-    
-    
+
+
     def explore(self):
         """
         This subroutine allows the mouse to map out the maze.
