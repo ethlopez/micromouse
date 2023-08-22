@@ -1,6 +1,43 @@
-def get_neighbours(x, y, diagonal_bias, maze):
-    #returns the cells adjacent and if diagonal_bias is true diagonal to the cell
-    pass
+def get_neighbours(x : int,
+                   y : int,
+                   maze : list[list[bool]], 
+                   diagonal_bias : bool = False) -> list[bool]:
+    #returns the cells adjacent and if diagonal_bias is true, diagonal to the cell
+    adjacent = [
+        maze[y-1][x+0],
+        maze[y+0][x+1],
+        maze[y+1][x+0],
+        maze[y+0][x-1]
+    ]
+                       
+    #adds diagonals if the generator is using a diagonal_bias
+    if diagonal_bias:
+        adjacent.append(maze[y-1][x-1],
+                        maze[y+1][x-1],
+                        maze[y-1][x+1],
+                        maze[y+1][x+1])
+        
+    return adjacent
+
+        
+def is_valid_neighbour(x : int,
+                         y : int,
+                         maze : list[list[bool]],
+                         diagonal_bias : bool = False) -> bool:
+
+    neighbours = get_neighbours(x, y, maze, diagonal_bias)
+    number_of_empty_neighbours = 0
+    
+    for i in range(len(neighbours)):
+        if not neighbours[i]:
+            number_of_empty_neighbours += 1
+            
+    valid = number_of_empty_neighbours == 1 and maze[y][x]
+                             
+    return valid
+        
+            
+        
 
 
 def generate_maze(parameter: int) -> list[int]:
@@ -69,7 +106,7 @@ def generate_maze(parameter: int) -> list[int]:
     #sets a list of cells that can be added to the maze
     x = start_position[0]
     y = start_position[1]
-    expansion_cells = get_neighbours(x, y, diagonal_bias, maze)
+    expansion_cells = get_valid_neighbours(x, y, diagonal_bias, maze)
 
     #while the maze it not finished
     while not maze_finished:
